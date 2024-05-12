@@ -12,8 +12,9 @@ tempCelsius = (weather_data.json()["main"]["temp"] - 32) / 1.8
 fellslikeCelsius = (weather_data.json()["main"]["feels_like"] - 32) / 1.8
 minCelsius = (weather_data.json()["main"]["temp_min"] - 32) / 1.8
 maxCelsius = (weather_data.json()["main"]["temp_max"] - 32) / 1.8
+humidity = weather_data.json()["main"]["humidity"]
 
-#print(weather_data.json())
+print(weather_data.json())
 
 def main(page: ft.Page):
 
@@ -49,29 +50,45 @@ def main(page: ft.Page):
                         )
                     ]
                 ),
-                ft.Container(height=20),
-                ft.Text(
-                    value="Seja bem vindo!",
-                    weight=ft.FontWeight.BOLD,
-                    size=35,
-                    color="white",
-                ),
-                ft.Text(
-                    value=f"Hoje o clima está {'ENSOLARADO!'} ☀️",
-                    color="white",
-                    weight=ft.FontWeight.W_600,
-                    size=15,
+                ft.Container(height=10),
+                ft.Container(
+                    padding=ft.padding.only(left=20),
+                    content=ft.Text(
+                        value="Seja bem vindo!",
+                        weight=ft.FontWeight.BOLD,
+                        size=35,
+                        color="white",
+                    ),
                 ),
                 ft.Container(
-                    padding=ft.padding.only(top=20, left=80),
-                    content=ft.Image(
-                        width=150,
-                        height=150,
-                        src="assets/weather_icons_dovora_interactive/PNG/512/day_clear.png"
+                    padding=ft.padding.only(left=30),
+                    content=ft.Text(
+                        value=f"Hoje o clima está {'ENSOLARADO'} ☀️",
+                        color="white",
+                        weight=ft.FontWeight.W_600,
+                        size=15,
+                    ),
+                ),
+                ft.Container(
+                    padding=ft.padding.only(top=20),
+                    content=ft.Row(
+                        controls=[
+                            ft.Image(
+                                width=150,
+                                height=150,
+                                src="assets/weather_icons_dovora_interactive/PNG/512/day_clear.png"
+                            ),
+                            ft.Text(
+                                value=f" {tempCelsius:.0f} ºC",
+                                size=50,
+                                weight=ft.FontWeight.BOLD,
+                                color="white"
+                            ),
+                        ]
                     )
                 ),
                 ft.Container(
-                    padding=ft.padding.only(top=10, left=50),
+                    padding=ft.padding.only(top=20, left=50),
                     content=ft.Row(
                         controls=[
                             ft.Icon(ft.icons.LOCATION_PIN, color="white"),
@@ -84,41 +101,44 @@ def main(page: ft.Page):
                         ]
                     )
                 ),
-                ft.Container(
-                    padding=ft.padding.only(top=5, left=80),
-                    content=ft.Text(
-                        value=f"Temperatura: {tempCelsius} ºC",
-                        weight=ft.FontWeight.W_500,
-                        size=15,
-                        color="white",
-                    ),
-                ),
+                ft.Container(height=10),
                 ft.Container(
                     width=310,
-                    height=200,
+                    height=170,
                     border_radius=20,
-                    margin=ft.margin.only(top=25),
                     bgcolor="#25232300",
                     content=ft.Container(
-                        padding=ft.padding.only(left=25, bottom=125),
-                        content=ft.Row(
+                        padding=ft.padding.only(top=25, left=15, bottom=110),
+                        content=ft.Column(
                             controls=[
                                 ft.Text(
-                                    value=f"Mínima: {minCelsius} ºC   |",
+                                    value=f"Mínima: {minCelsius:.0f} ºC   |   Máxima: {maxCelsius:.0f} ºC",
                                     weight=ft.FontWeight.W_600,
-                                    size=15,
+                                    size=18,
                                     color="white",
                                 ),
-                                ft.Text(
-                                    value=f"Máxima: {maxCelsius} ºC",
-                                    weight=ft.FontWeight.W_600,
-                                    size=15,
-                                    color="white",
+                                ft.Container(
+                                    padding=ft.padding.only(top=10, left=35),
+                                    content=ft.Text(
+                                            value=f"Sensação térmica: {fellslikeCelsius:.0f} ºC",
+                                        weight=ft.FontWeight.W_600,
+                                        size=18,
+                                        color="white",
+                                    )
+                                ),
+                                ft.Container(
+                                    padding=ft.padding.only(top=10, left=70),
+                                    content=ft.Text(
+                                        value=f"Umidade: {humidity}%",
+                                        weight=ft.FontWeight.W_600,
+                                        size=18,
+                                        color="white",
+                                    )
                                 )
                             ]
                         )
                     )
-                )
+                ),
             ]
         )
     )
