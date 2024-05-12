@@ -1,2 +1,2 @@
-# minimalistic-clock-and-weather
+# Weather-App
  A minimalistic program that display the time, date and weather
