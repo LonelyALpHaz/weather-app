@@ -1,2 +1,4 @@
-.copy.txt
-
+*.txt
+assets/*
+venv/*
+*.py

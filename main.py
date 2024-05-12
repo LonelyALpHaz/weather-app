@@ -19,7 +19,7 @@ current_date_time = datetime.now()
 current_date = current_date_time.strftime("%d/%m")
 current_time = current_date_time.strftime("%H:%M")
 
-#print(weather_data.json())
+print(weather_data.json())
 
 def main(page: ft.Page):
 
@@ -75,7 +75,7 @@ def main(page: ft.Page):
                     ),
                 ),
                 ft.Container(
-                    padding=ft.padding.only(left=25),
+                    padding=ft.padding.only(left=30),
                     content=ft.Text(
                         value=f"{current_time} | {current_date}",
                         weight=ft.FontWeight.W_800,
@@ -88,13 +88,13 @@ def main(page: ft.Page):
                     content=ft.Row(
                         controls=[
                             ft.Image(
-                                width=150,
-                                height=150,
+                                width=140,
+                                height=140,
                                 src="assets/weather_icons_dovora_interactive/PNG/512/day_clear.png"
                             ),
                             ft.Text(
                                 value=f" {tempCelsius:.0f} ºC",
-                                size=50,
+                                size=55,
                                 weight=ft.FontWeight.BOLD,
                                 color="white"
                             ),
@@ -102,7 +102,7 @@ def main(page: ft.Page):
                     )
                 ),
                 ft.Container(
-                    padding=ft.padding.only(top=20, left=50),
+                    padding=ft.padding.only(top=20, left=55),
                     content=ft.Row(
                         controls=[
                             ft.Icon(ft.icons.LOCATION_PIN, color="white"),
