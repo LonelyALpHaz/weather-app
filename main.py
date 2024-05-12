@@ -1,4 +1,5 @@
 import flet as ft
+from datetime import datetime
 import requests
 
 api_key = "0c33e0a7fefd189dc02f05997704299f"
@@ -14,7 +15,11 @@ minCelsius = (weather_data.json()["main"]["temp_min"] - 32) / 1.8
 maxCelsius = (weather_data.json()["main"]["temp_max"] - 32) / 1.8
 humidity = weather_data.json()["main"]["humidity"]
 
-print(weather_data.json())
+current_date_time = datetime.now()
+current_date = current_date_time.strftime("%d/%m")
+current_time = current_date_time.strftime("%H:%M")
+
+#print(weather_data.json())
 
 def main(page: ft.Page):
 
@@ -65,9 +70,18 @@ def main(page: ft.Page):
                     content=ft.Text(
                         value=f"Hoje o clima está {'ENSOLARADO'} ☀️",
                         color="white",
-                        weight=ft.FontWeight.W_600,
+                        weight=ft.FontWeight.W_700,
                         size=15,
                     ),
+                ),
+                ft.Container(
+                    padding=ft.padding.only(left=25),
+                    content=ft.Text(
+                        value=f"{current_time} | {current_date}",
+                        weight=ft.FontWeight.W_800,
+                        size=40,
+                        color="white",
+                    )
                 ),
                 ft.Container(
                     padding=ft.padding.only(top=20),
