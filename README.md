@@ -1,2 +1,16 @@
-# Weather-App
- A minimalistic program that display the time, date and weather
+<h1 align="center">Minimalistic Weather App</h1>
+<p align="center">Programa minimalista que informa a hora, data e clima de um determinado local</p>
+
+<div align="center">
+ <img src="assets/weather_icons_dovora_interactive/SVG/day_rain.svg" width="300px" height="300px" alt="app-logo">
+</div>
+
+## Preview:
+
+<div align="center">
+ <img src="screenshots/Screenshot_1.png">
+</div>
+
+## Recursos utilizados:
+
+Projeto desenvolvido utilizando a linguagem ```Python``` na versão 3.11.4 em conjunto com o framework ```Flet``` para a criação da interface gráfica, API do ```OpenWeatherMap``` para coletar os dados do clima e assets do ```Dovora```.
