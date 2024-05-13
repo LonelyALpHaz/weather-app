@@ -70,8 +70,6 @@ def main(page: ft.Page):
     #BL = "#252323"
 
     page.title = "Weather App"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.horizontal_alignment = ft.MainAxisAlignment.CENTER
 
     # First screen and top icons
     first_screen = ft.Container(
@@ -105,26 +103,34 @@ def main(page: ft.Page):
                         weight=ft.FontWeight.BOLD,
                         size=35,
                         color="white",
-                    ),
+                    )
                 ),
                 # Weather disclaimer
                 ft.Container(
-                    padding=ft.padding.only(left=30),
-                    content=ft.Text(
-                        value=f"Hoje o clima está {weather_hint}",
-                        color="white",
-                        weight=ft.FontWeight.W_700,
-                        size=15,
-                    ),
+                    content=ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        controls=[
+                            ft.Text(
+                                value=f"Hoje o clima está {weather_hint}",
+                                color="white",
+                                weight=ft.FontWeight.W_700,
+                                size=15,
+                            )
+                        ]
+                    )
                 ),
                 # Clock and date information
                 ft.Container(
-                    padding=ft.padding.only(left=30),
-                    content=ft.Text(
-                        value=f"{current_time} | {current_date}",
-                        weight=ft.FontWeight.W_800,
-                        size=40,
-                        color="white",
+                    content=ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        controls=[
+                            ft.Text(
+                                value=f"{current_time} | {current_date}",
+                                weight=ft.FontWeight.W_800,
+                                size=40,
+                                color="white",
+                            )
+                        ]
                     )
                 ),
                 # Weather png and temperature
@@ -142,14 +148,15 @@ def main(page: ft.Page):
                                 size=55,
                                 weight=ft.FontWeight.BOLD,
                                 color="white"
-                            ),
+                            )
                         ]
                     )
                 ),
                 # City selected information
                 ft.Container(
-                    padding=ft.padding.only(top=20, left=55),
+                    padding=ft.padding.only(top=20),
                     content=ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
                             ft.Icon(ft.icons.LOCATION_PIN, color="white"),
                             ft.Text(
@@ -169,37 +176,55 @@ def main(page: ft.Page):
                     border_radius=20,
                     bgcolor="#25232300",
                     content=ft.Container(
-                        padding=ft.padding.only(top=25, left=15, bottom=110),
+                        padding=ft.padding.only(top=25, right=5, bottom=110),
                         content=ft.Column(
                             controls=[
-                                ft.Text(
-                                    value=f"Mínima: {minCelsius:.0f} ºC   |   Máxima: {maxCelsius:.0f} ºC",
-                                    weight=ft.FontWeight.W_600,
-                                    size=18,
-                                    color="white",
-                                ),
                                 ft.Container(
-                                    padding=ft.padding.only(top=10, left=35),
-                                    content=ft.Text(
-                                            value=f"Sensação térmica: {fellslikeCelsius:.0f} ºC",
-                                        weight=ft.FontWeight.W_600,
-                                        size=18,
-                                        color="white",
+                                    padding=ft.padding.only(),
+                                    content=ft.Row(
+                                        alignment=ft.MainAxisAlignment.CENTER,
+                                        controls=[
+                                            ft.Text(
+                                                value=f"Mínima: {minCelsius:.0f} ºC   |   Máxima: {maxCelsius:.0f} ºC",
+                                                weight=ft.FontWeight.W_600,
+                                                size=18,
+                                                color="white",
+                                            )
+                                        ]
                                     )
                                 ),
                                 ft.Container(
-                                    padding=ft.padding.only(top=10, left=70),
-                                    content=ft.Text(
-                                        value=f"Umidade: {humidity}%",
-                                        weight=ft.FontWeight.W_600,
-                                        size=18,
-                                        color="white",
+                                    padding=ft.padding.only(top=10, right=10),
+                                    content=ft.Row(
+                                        alignment=ft.MainAxisAlignment.CENTER,
+                                        controls=[
+                                            ft.Text(
+                                                value=f"Sensação térmica: {fellslikeCelsius:.0f} ºC",
+                                                weight=ft.FontWeight.W_600,
+                                                size=18,
+                                                color="white",
+                                            )
+                                        ]
+                                    )
+                                ),
+                                ft.Container(
+                                    padding=ft.padding.only(top=10, right=10),
+                                    content=ft.Row(
+                                        alignment=ft.MainAxisAlignment.CENTER,
+                                        controls=[
+                                            ft.Text(
+                                                value=f"Umidade: {humidity}%",
+                                                weight=ft.FontWeight.W_600,
+                                                size=18,
+                                                color="white",
+                                            )
+                                        ]
                                     )
                                 )
                             ]
                         )
                     )
-                ),
+                )
             ]
         )
     )
