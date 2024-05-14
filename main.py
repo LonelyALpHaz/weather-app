@@ -1,11 +1,12 @@
 import flet as ft
+from token_api import return_token_api
 from datetime import datetime
 import requests
 import threading
 import time
 
-API_KEY = "0c33e0a7fefd189dc02f05997704299f"
-city = "British Columbia"
+API_KEY = return_token_api()
+city = "São Paulo"
 
 # OpenWeatherMap API Request
 def get_weather_data():
