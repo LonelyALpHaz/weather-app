@@ -1,7 +1,6 @@
 import flet as ft
 from token_api import get_weather_data
 from datetime import datetime
-import requests
 import threading
 import time
 
@@ -20,9 +19,18 @@ def update_date_time():
 
 def main(page: ft.Page):
 
+    # Go back
+    page.go("/")
+
+    # Get city input
+    cidade = ft.Ref[ft.TextField]()
+
+    def get_city():
+        city = "Campina Grande"
+        return city
 
     # Data converted to celsius
-    weather_data, weather_png, weather_hint, city = get_weather_data()
+    weather_data, weather_png, weather_hint, city = get_weather_data(get_city())
     tempCelsius = convert_to_celsius(weather_data["main"]["temp"])
     fellslikeCelsius = convert_to_celsius(weather_data["main"]["feels_like"])
     minCelsius = convert_to_celsius(weather_data["main"]["temp_min"])
@@ -37,6 +45,69 @@ def main(page: ft.Page):
 
     page.title = "Weather App"
 
+    # City selection screen
+    select_city_screen = ft.Container(
+        width=350,
+        height=730,
+        bgcolor=FG,
+        border_radius=20,
+        content=ft.Column(
+            controls=[
+                    ft.Container(
+                            margin=ft.margin.only(top=50, left=20),
+                            content=ft.Icon(ft.icons.ARROW_BACK, color="white"),
+                            on_click=lambda _: page.go('/')
+                    ),
+                    ft.Container(
+                        padding=ft.padding.only(top=180),
+                        content=ft.Row(
+                            alignment=ft.MainAxisAlignment.CENTER,
+                            controls=[
+                                ft.Text(
+                                    value="Selecione sua cidade",
+                                    color="white",
+                                    size=28,
+                                    weight=ft.FontWeight.BOLD,
+                                ),
+                            ]
+                        )
+                    ),
+                    ft.Container(
+                        on_click=get_city(),
+                        padding=ft.padding.only(top=20),
+                        content=ft.Row(
+                            alignment=ft.MainAxisAlignment.CENTER,
+                            controls=[ft.TextField(
+                                    ref=cidade,
+                                    label="Cidade",
+                                    color="white",
+                                    prefix_icon=ft.icons.HOUSE,                            
+                                    border_color="white",
+                                    border_radius=20,
+                                    width=290,
+                                )   
+                            ]
+                        )
+                    ),
+                    ft.Container(
+                        padding=ft.padding.only(top=20),
+                        content=ft.Row(
+                            alignment=ft.MainAxisAlignment.CENTER,
+                            controls=[
+                                ft.ElevatedButton(
+                                    width=290,
+                                    height=40,
+                                    text="Selecionar",
+                                    bgcolor="white",
+                                    color=FG,
+                                )
+                            ]
+                        )
+                    ),
+                ]
+            )
+        )
+    
     # First screen and top icons
     first_screen = ft.Container(
         width=350,
@@ -54,8 +125,8 @@ def main(page: ft.Page):
                     ft.Container(content=ft.Icon(ft.icons.MENU_ROUNDED, color="white")),
                     ft.Row(
                         controls=[
-                            ft.Icon(ft.icons.SEARCH, color="white"),
-                            ft.Icon(ft.icons.NOTIFICATIONS_OUTLINED, color="white")
+                            ft.Container(on_click=lambda _: page.go("select_city_screen"), content=ft.Icon(ft.icons.SEARCH, color="white")),
+                            ft.Container(content=ft.Icon(ft.icons.NOTIFICATIONS_OUTLINED, color="white")),
                             ]
                         )
                     ]
@@ -195,7 +266,42 @@ def main(page: ft.Page):
         )
     )
 
-    page.add(first_screen)
+    container = ft.Container(
+        width=350,
+        height=730,
+        bgcolor=BG,
+        border_radius=20,
+        content=ft.Stack(
+            controls=[
+                select_city_screen,
+                first_screen,
+            ]
+        )
+    )
+
+    pages = {
+        "/":ft.View(
+            "/",
+            [
+                container
+            ],
+        ),
+        "select_city_screen": ft.View(
+            "select_city_screen",
+            [
+                select_city_screen
+            ]
+        ),
+    }
+
+    def route_change(route):
+        page.views.clear()
+        page.views.append(pages[page.route])
+
+    page.on_route_change = route_change
+    page.go(page.route)
+
+    page.add(select_city_screen)
 
 if __name__ == "__main__":
 
