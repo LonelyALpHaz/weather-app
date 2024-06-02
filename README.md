@@ -2,7 +2,7 @@
 <p align="center">Programa minimalista que informa a hora, data e clima de um determinado local</p>
 
 <div align="center">
- <img src="assets/weather_icons_dovora_interactive/SVG/day_rain.svg" width="300px" height="300px" alt="app-logo">
+ <img src="assets/weather_icons_dovora_interactive/SVG/day_rain.svg" width="250px" height="250px" alt="app-logo">
 </div>
 
 ## Preview:
